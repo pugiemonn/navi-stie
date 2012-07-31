@@ -30,6 +30,13 @@ class NavisController extends AppController {
     $this->set(compact('title_for_layout', 'tiiki'));
     $this->render();
   }
+  
+  public function shop()
+  {
+    
+    $this->set(compact('title_for_layout', 'tiiki'));
+    $this->render();
+  }
 
   public function add()
   {
