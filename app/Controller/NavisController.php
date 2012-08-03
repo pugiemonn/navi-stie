@@ -3,6 +3,7 @@
 class NavisController extends AppController {
   #public $scaffold;
   public $helpers = array('Html', 'Form');
+  public $uses    = array('NaviShop');
 
   public function index() {
     $params = array(
@@ -25,12 +26,13 @@ class NavisController extends AppController {
 
   public  function todoufuken($id = null)
   {
-    $navi_name   = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
-    $navi_param  = $this->check_navi($navi_name);
-    $todoufuken  = Configure::read('todoufuken');
-    $tiiki       = Configure::read('tiiki');
-    $tiiki_group = Configure::read('tiiki_group');
-    #$shop_list   = $this->Shop->find('all');
+    $navi_name      = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
+    $navi_param     = $this->check_navi($navi_name);
+    $todoufuken     = Configure::read('todoufuken');
+    $tiiki          = Configure::read('tiiki');
+    $tiiki_group    = Configure::read('tiiki_group');
+    #$todofuken_list = $this->Todoufuken->find('all');
+    $shop_list = $this->NaviShop->find('all', array());
       
     #$this->Post->id = $id;
     #$this->set('post', $this->Post->read());
