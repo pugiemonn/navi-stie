@@ -31,6 +31,10 @@ class NaviShop extends AppModel{
           'limit' => 3
         );
         return parent::find('all', $options);
+      //お店の情報を一軒取得する
+      case 'getShopData' :
+        #parent::id = $options; 
+        return parent::read(array(), $options);
       case 'list' :
         return parent::find('all', array_merge(
           array(

@@ -50,8 +50,11 @@ class NavisController extends AppController {
   
   public function shop()
   {
-    
     $this->set(compact('title_for_layout', 'tiiki'));
+    $shop_id   = $this->request->params['shop_id'];
+    $shop_data = $this->NaviShop->find('getShopData', $shop_id); 
+    #pr($shop_data);
+    $this->set(compact('title_for_layout', 'tiiki', 'shop_data'));
     $this->render();
   }
 

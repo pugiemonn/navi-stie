@@ -1,0 +1,28 @@
+
+table.navi-shop-data-table {
+    width: 100%;
+    border: 1px #888888 solid;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* ヘッダー行 */
+table.navi-shop-data-table th {
+    padding: 5px;
+    border: 1px #888888 solid;
+    border-width: 0 1px 1px 1px;
+    /* ヘッダーの背景色 */
+    background: #EEEEEE;
+    font-weight: bold;
+    line-height: 120%;
+    text-align: center;
+}
+
+/* 通常行 */
+table.navi-shop-data-table td {
+    padding: 5px;
+    border: 1px #888888 solid;
+    border-width: 0 0 1px 1px;
+    background: #ffffff;
+    /* text-align: center; */
+}

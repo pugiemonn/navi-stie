@@ -36,6 +36,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->fetch('script');
 	?>
     <link rel="stylesheet" href="/css/jquery.mobile-1.1.0.min.css" />
+    <link rel="stylesheet" href="/css/navi.css" />
     <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script src="/js/jquery.mobile-1.1.0.min.js"></script>
 </head>
