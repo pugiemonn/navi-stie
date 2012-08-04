@@ -29,7 +29,7 @@ class NavisController extends AppController {
     }
     #pr($tiiki_list);
     //exit("ss");
-    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group_count', 'navi_param', 'popular_shop_list'));
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group_count', 'navi_name', 'navi_param', 'popular_shop_list'));
   }
 
   public  function todoufuken($id = null)
