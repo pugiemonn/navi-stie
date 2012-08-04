@@ -16,12 +16,20 @@ class NavisController extends AppController {
 
     $title_for_layout = SITE_TITLE;
     #pr($debug);
-    $todoufuken  = Configure::read('todoufuken');
-    $tiiki       = Configure::read('tiiki');
-    $tiiki_group = Configure::read('tiiki_group');
-    #pr($todoufuken);
-    //$this->set('posts', $this->Post->find('all', $params));
-    $this->set(compact('title_for_layout', 'tiiki'));
+    $todoufuken        = Configure::read('todoufuken');
+    $tiiki             = Configure::read('tiiki');
+    $tiiki_group       = Configure::read('tiiki_group');
+    $popular_shop_list = $this->NaviShop->find('getPopularShops');
+    #$tiiki_group_count = $this->NaviShop->find('getTiikiGroupCount', array(, $tiiki_group));
+    $tiiki_group_count  = array();
+    foreach($tiiki_group as $item)
+    {
+      //countをループしているところはjoin使えばサブクエリで取れそう
+      $tiiki_group_count[] = $this->NaviShop->find('getTiikiGroupCount', $item);
+    }
+    #pr($tiiki_list);
+    //exit("ss");
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group_count', 'navi_param', 'popular_shop_list'));
   }
 
   public  function todoufuken($id = null)
