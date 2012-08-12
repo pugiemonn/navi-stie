@@ -44,7 +44,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	<div id="container" data-role="page">
 		<div id="header"  data-role="header">
-			<h1><?php echo $this->Html->link('Home', '/'); ?></h1>
+			<h1>
+              <?php echo $this->Html->link($navi_param['name'] . 'ナビ', '/' . $navi_name); ?>
+              <?php //echo $this->Html->link('Home', '/'); ?>
+            </h1>
 		</div>
 		<div id="content" data-role="content">
 

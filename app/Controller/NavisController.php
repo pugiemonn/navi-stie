@@ -44,17 +44,18 @@ class NavisController extends AppController {
       
     #$this->Post->id = $id;
     #$this->set('post', $this->Post->read());
-    $this->set(compact('title_for_layout', 'tiiki', 'navi_param'));
+    $this->set(compact('title_for_layout', 'tiiki', 'navi_param', 'navi_name'));
     $this->render();
   }
   
   public function shop()
   {
-    $this->set(compact('title_for_layout', 'tiiki'));
+    $navi_name = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
+    $navi_param  = $this->check_navi($navi_name);
     $shop_id   = $this->request->params['shop_id'];
     $shop_data = $this->NaviShop->find('getShopData', $shop_id); 
     #pr($shop_data);
-    $this->set(compact('title_for_layout', 'tiiki', 'shop_data'));
+    $this->set(compact('title_for_layout', 'tiiki', 'shop_data', 'navi_param', 'navi_name'));
     $this->render();
   }
 
@@ -87,7 +88,7 @@ class NavisController extends AppController {
     }
     if($flag == 1)
     {
-      
+      #naviの名前を返す 
       return Configure::read('navi_param.'.$navi_name);
     }
     else
