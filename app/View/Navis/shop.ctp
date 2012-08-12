@@ -1,4 +1,5 @@
 <?php
+echo $this->Element('pankuzu');
 echo $this->Html->tag('h1', h($shop_data['NaviShop']['name']));
 echo $this->Html->tag('table', null, array('class' => 'navi-shop-data-table'));
 if(isset($shop_data['NaviShop']['name']) && $shop_data['NaviShop']['name'] != '')
@@ -74,5 +75,5 @@ echo $this->Html->tag('/td', null);
 echo $this->Html->tag('/tr', null);
 }
 echo $this->Html->tag('/table', null);
-pr($shop_data);
+#pr($shop_data);
 ?>
