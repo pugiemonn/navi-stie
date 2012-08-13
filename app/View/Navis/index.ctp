@@ -4,7 +4,7 @@ echo $this->Html->tag('ul', null, array('data-role' => 'listview', 'data-theme' 
 for($i = 1; $i < 10; $i++)
 {
   echo $this->Html->tag('li', null, array());
-  echo $this->Html->link(h($tiiki[$i])."(".$tiiki_group_count[$i-1].")", '/');
+  echo $this->Html->link(h($tiiki[$i])."(".$tiiki_group_count[$i-1].")", '/' . $navi_name . '/' . $i);
   echo $this->Html->tag('/li', null);
 }
 echo $this->Html->tag('/ul');
