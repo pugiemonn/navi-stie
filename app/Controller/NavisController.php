@@ -32,9 +32,25 @@ class NavisController extends AppController {
     $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group_count', 'navi_name', 'navi_param', 'popular_shop_list'));
   }
 
+  public  function tiiki($id = null)
+  {
+    $navi_name     = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
+    $tiiki_id      = isset($this->request->params['tiiki_id']) ? intval($this->request->params['tiiki_id']) : 0;
+    $navi_param    = $this->check_navi($navi_name);
+    $todoufuken    = Configure::read('todoufuken');
+    $tiiki         = Configure::read('tiiki');
+    $tiiki_group   = Configure::read('tiiki_group');
+    #$todofuken_list = $this->Todoufuken->find('all');
+    $shop_list = $this->NaviShop->find('all', array());
+      
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group', 'tiiki_id', 'navi_param', 'navi_name', 'shop_list', 'todoufuken'));
+    $this->render();
+  }
+
   public  function todoufuken($id = null)
   {
     $navi_name      = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
+    $todoufuken_id  = isset($this->request->params['todoufuken_id']) ? intval($this->request->params['todoufuken_id']) : 0;
     $navi_param     = $this->check_navi($navi_name);
     $todoufuken     = Configure::read('todoufuken');
     $tiiki          = Configure::read('tiiki');
@@ -42,9 +58,7 @@ class NavisController extends AppController {
     #$todofuken_list = $this->Todoufuken->find('all');
     $shop_list = $this->NaviShop->find('all', array());
       
-    #$this->Post->id = $id;
-    #$this->set('post', $this->Post->read());
-    $this->set(compact('title_for_layout', 'tiiki', 'navi_param', 'navi_name'));
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group', 'navi_param', 'navi_name', 'shop_list', 'todoufuken', 'todoufuken_id'));
     $this->render();
   }
   
