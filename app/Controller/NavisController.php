@@ -42,8 +42,20 @@ class NavisController extends AppController {
     $tiiki_group   = Configure::read('tiiki_group');
     #$todofuken_list = $this->Todoufuken->find('all');
     $shop_list = $this->NaviShop->find('all', array());
-      
-    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group', 'tiiki_id', 'navi_param', 'navi_name', 'shop_list', 'todoufuken'));
+    $todoufuken_count = array();
+    $i = 0;
+    foreach($tiiki_group[$tiiki_id] as $item)
+    {
+      //countをループしているところはjoin使えばサブクエリで取れそう
+      $todoufuken_count[] = $this->NaviShop->find('getTodoufukenCount', $item);
+      #echo $item;
+      $i ++ ;
+    }
+    #pr($todoufuken_count);
+
+    #exit('aaa');
+
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group', 'tiiki_id', 'navi_param', 'navi_name', 'shop_list', 'todoufuken', 'todoufuken_count'));
     $this->render();
   }
 

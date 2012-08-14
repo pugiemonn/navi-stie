@@ -26,6 +26,15 @@ class NaviShop extends AppModel{
         );
         return parent::find('count', $options
         );
+      case 'getTodoufukenCount' :
+        #pr($options); 
+        $options = array(
+          'conditions' => array(
+            '`NaviShop`.`todoufuken_id`' => $options
+          )
+        );
+        return parent::find('count', $options
+        );
       case 'getPopularShops' :
         $options = array(
           'limit' => 3
