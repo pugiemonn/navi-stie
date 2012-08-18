@@ -102,22 +102,6 @@ class NavisController extends AppController {
     $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'shop_data', 'navi_param', 'navi_name', 'todoufuken'));
     $this->render();
   }
-
-  public function add()
-  {
-    if($this->request->is('post'))
-    {
-      if($this->Post->save($this->request->data))
-      {
-        $this->Session->setFlash('Success!');
-        $this->redirect(array('action' => 'index'));
-      }
-      else
-      {
-        $this->Session->setFlash('failed!');
-      }
-    }
-  } 
   
   #naviが存在するかチェックする
   public function check_navi($navi_name = 0)
