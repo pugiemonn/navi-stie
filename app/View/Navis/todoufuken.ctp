@@ -1,5 +1,5 @@
 <?php
-echo $this->element('pankuzu');
+echo $this->element('pankuzu_todoufuken');
 echo $this->Html->tag('h1', $navi_param['name'].'ナビ');
 echo $this->Html->tag('p', $todoufuken[$todoufuken_id] . 'の' . $navi_param['name'] . 'リスト');
 #pr($shop_list);

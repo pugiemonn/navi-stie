@@ -1,4 +1,5 @@
 <?php
+echo $this->Element('pankuzu_tiiki');
 echo $this->Html->tag('h1', $navi_param['name'].'ナビ');
 echo $this->Html->tag('p', $tiiki[$tiiki_id] . 'の' . $navi_param['name'] . 'リスト');
 #pr($tiiki_group);

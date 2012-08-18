@@ -67,21 +67,39 @@ class NavisController extends AppController {
     $todoufuken     = Configure::read('todoufuken');
     $tiiki          = Configure::read('tiiki');
     $tiiki_group    = Configure::read('tiiki_group');
+    foreach($tiiki_group as $key => $item)
+    {
+      foreach($item as $id)
+      {
+        if($id == $todoufuken_id)
+        {
+          $tiiki_id = $key;
+        }
+      }
+    }
+    //exit();
     #$todofuken_list = $this->Todoufuken->find('all');
     $shop_list = $this->NaviShop->find('all', array());
       
-    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group', 'navi_param', 'navi_name', 'shop_list', 'todoufuken', 'todoufuken_id'));
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'tiiki_group', 'navi_param', 'navi_name', 'shop_list', 'todoufuken', 'todoufuken_id'));
     $this->render();
   }
   
   public function shop()
   {
-    $navi_name = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
+    header("Content-type:text/html;charset=UTF-8");
+    $navi_name   = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
     $navi_param  = $this->check_navi($navi_name);
-    $shop_id   = $this->request->params['shop_id'];
-    $shop_data = $this->NaviShop->find('getShopData', $shop_id); 
+    $shop_id     = $this->request->params['shop_id'];
+    $shop_data   = $this->NaviShop->find('getShopData', $shop_id); 
+    $navi_param     = $this->check_navi($navi_name);
+    $todoufuken     = Configure::read('todoufuken');
+    $tiiki          = Configure::read('tiiki');
+    $tiiki_group    = Configure::read('tiiki_group');
     #pr($shop_data);
-    $this->set(compact('title_for_layout', 'tiiki', 'shop_data', 'navi_param', 'navi_name'));
+    $tiiki_id       = array_search($tiiki,$shop_data['NaviShop']['todoufuken_id']);
+    //exit("aaa");
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'shop_data', 'navi_param', 'navi_name', 'todoufuken'));
     $this->render();
   }
 
