@@ -8,10 +8,12 @@ echo $this->Html->tag('ul', null, array('data-role' => 'listview'));
 $i = 0;
 foreach($tiiki_group[$tiiki_id] as $todoufuken_id)
 {
+  if($todoufuken_count[$i] > 0)
+  {
   echo $this->Html->tag('li', null); 
-#  echo $todoufuken_id;
   echo $this->Html->link($todoufuken[$todoufuken_id] . '(' . $todoufuken_count[$i] . ')', '/' . $navi_name . '/' . $tiiki_id . '/' . $todoufuken_id);
   echo $this->Html->tag('/li', null); 
+  }
   $i ++;
 }
 echo $this->Html->tag('/ul', null);
