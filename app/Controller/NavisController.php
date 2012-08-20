@@ -79,7 +79,7 @@ class NavisController extends AppController {
     }
     //exit();
     #$todofuken_list = $this->Todoufuken->find('all');
-    $shop_list = $this->NaviShop->find('all', array());
+    $shop_list = $this->NaviShop->find('getTodoufukenShops', $todoufuken_id);
       
     $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'tiiki_group', 'navi_param', 'navi_name', 'shop_list', 'todoufuken', 'todoufuken_id'));
     $this->render();

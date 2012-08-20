@@ -1,7 +1,7 @@
 <?php
 echo $this->Element('pankuzu_tiiki');
 echo $this->Html->tag('h1', $navi_param['name'].'ナビ');
-echo $this->Html->tag('p', $tiiki[$tiiki_id] . 'の' . $navi_param['name'] . 'リスト');
+echo $this->Html->tag('p', $this->Html->tag('strong', $tiiki[$tiiki_id]) . 'の' . $navi_param['name'] . 'リスト');
 #pr($tiiki_group);
 #pr($todoufuken_count);
 echo $this->Html->tag('ul', null, array('data-role' => 'listview'));
