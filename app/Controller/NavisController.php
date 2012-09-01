@@ -3,9 +3,15 @@
 class NavisController extends AppController {
   #public $scaffold;
   public $helpers = array('Html', 'Form');
-  public $uses    = array('NaviShop');
+  public $uses    = array('NaviShop', 'NaviCity');
 
   public function index() {
+    $navi_param = array('name' => '');
+    $navi_name  = '';
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group_count', 'navi_name', 'navi_param', 'popular_shop_list'));
+  }
+
+  public function naviTop() {
     $params = array(
       'order' => 'modified desc',
       'limit' => 20
@@ -32,6 +38,7 @@ class NavisController extends AppController {
     $this->set(compact('title_for_layout', 'tiiki', 'tiiki_group_count', 'navi_name', 'navi_param', 'popular_shop_list'));
   }
 
+  //関東地方など、地方名の登録店舗
   public  function tiiki($id = null)
   {
     $navi_name     = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
@@ -59,6 +66,7 @@ class NavisController extends AppController {
     $this->render();
   }
 
+  //都道府県の登録店舗を表示する
   public  function todoufuken($id = null)
   {
     $navi_name      = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
@@ -67,6 +75,9 @@ class NavisController extends AppController {
     $todoufuken     = Configure::read('todoufuken');
     $tiiki          = Configure::read('tiiki');
     $tiiki_group    = Configure::read('tiiki_group');
+    
+    //city_idとかUMLが正しいかチェックするところです
+
     foreach($tiiki_group as $key => $item)
     {
       foreach($item as $id)
@@ -78,12 +89,39 @@ class NavisController extends AppController {
       }
     }
     //exit();
-    #$todofuken_list = $this->Todoufuken->find('all');
-    $shop_list = $this->NaviShop->find('getTodoufukenShops', $todoufuken_id);
-      
-    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'tiiki_group', 'navi_param', 'navi_name', 'shop_list', 'todoufuken', 'todoufuken_id'));
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'tiiki_group', 'navi_param', 'navi_name', 'todoufuken', 'todoufuken_id'));
+    //数が多いと都市を持ってくる
+    if(count($this->NaviShop->find('getCityCount', $todoufuken_id)) >= 5)
+    {
+
+    }
+    //都市が少ない場合はショップ一覧を表示する
+    else
+    {
+      $shop_list = $this->NaviShop->find('getTodoufukenShops', $todoufuken_id);
+      $this->set(compact('shop_list'));
+      $this->render();
+    }
+  }
+
+  public function city()
+  {
+    $navi_name      = isset($this->request->params['navi_name']) ? $this->request->params['navi_name'] : 0;
+    $city_id        = isset($this->request->params['city_id']) ? intval($this->request->params['city_id']) : 0;
+    #$todoufuken_id  = isset($this->request->params['todoufuken_id']) ? intval($this->request->params['todoufuken_id']) : 0;
+    $navi_param     = $this->check_navi($navi_name);
+    $todoufuken     = Configure::read('todoufuken');
+    $tiiki          = Configure::read('tiiki');
+    $tiiki_group    = Configure::read('tiiki_group');
+    $shop_list      = $this->NaviShop->find('getCityShops', $city_id);
+    $this->NaviCity->id = $city_id;
+    $city_info      = $this->NaviCity->read();
+
+    $this->set(compact('title_for_layout', 'tiiki', 'tiiki_id', 'tiiki_group', 'navi_param', 'navi_name', 'todoufuken', 'todoufuken_id', 'shop_list', 'city_info'));
     $this->render();
   }
+
+
   
   public function shop()
   {
@@ -122,6 +160,7 @@ class NavisController extends AppController {
     else
     {
       //リダイレクト処理
+      $this->redirect('/');
     }
   }
 }

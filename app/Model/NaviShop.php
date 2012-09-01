@@ -35,11 +35,52 @@ class NaviShop extends AppModel{
         );
         return parent::find('count', $options
         );
+      case 'getCityCount' :
+        #pr($options); 
+        $options = array(
+          'conditions' => array(
+            '`NaviShop`.`todoufuken_id`' => $options
+          ),
+          'fields'     => array(
+            '`NaviShop`.`city_id`',
+            'COUNT(`NaviShop`.`city_id`) AS `count`',
+          ),
+          'group'      => 
+            array('`NaviShop`.`city_id`'),
+        );
+        return parent::find('all', $options
+        );
       case 'getTodoufukenShops' :
         $options = array(
           'conditions' => array(
             '`NaviShop`.`todoufuken_id`' => $options
           )
+        );
+        return parent::find('all', $options);
+      case 'getCityShops' :
+        $options = array(
+          'conditions' => array(
+            '`NaviShop`.`city_id`' => $options
+          ),
+/*
+          'fields' => array(
+            '`NaviShop`.`id`',
+            '`NaviShop`.`tiiki_id`',
+            '`NaviShop`.`todoufuken_id`',
+            '`NaviShop`.`city_id`',
+            '`NaviShop`.`navi_id`',
+            '`NaviShop`.`name`',
+            '`NaviShop`.`url`',
+            '`NaviShop`.`owner`',
+            '`NaviShop`.`charge`',
+            '`NaviShop`.`seats`',
+            '`NaviShop`.`address`',
+            '`NaviShop`.`tel`',
+            '`NaviShop`.`access`',
+            '`NaviCity`.`id`',
+            '`NaviCity`.`name`',
+          ),
+*/
         );
         return parent::find('all', $options);
       case 'getPopularShops' :
@@ -74,6 +115,17 @@ class NaviShop extends AppModel{
         return parent::find($type, $options);
     }
   }
+
+  public $belongsTo = array(
+    'NaviCity' => array(
+      'className' => 'Navi_city',
+      'foreignKey' => 'city_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    )
+  );
+  
 }
 
 ?>
